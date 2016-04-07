@@ -1,0 +1,28 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+#canvas {
+    margin: auto;
+    display: block;
+    height: 90%;
+    width: 100%;
+    border-style: solid;
+}
+
+#noscript-warning {
+    color: #ff0000;
+}
+
+#settings, #controls {
+    height: 3%
+}
+
+.arrow {
+    height: 100%;
+}
