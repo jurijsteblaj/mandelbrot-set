@@ -19,8 +19,8 @@ var widthToHeight = function() {
 window.onload = function() {
     document.querySelector('#draw-button').onclick = drawMandelbrot;
     var arrows = document.querySelectorAll('.arrow');
-    for (let arrow of arrows) {
-        arrow.onclick = pan;
+    for (var i = 0; i < arrows.length; i++) {
+        arrows[i].onclick = pan;
     }
     document.querySelector('#zoom-in').onclick = zoomIn;
     document.querySelector('#zoom-out').onclick = zoomOut;
