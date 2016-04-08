@@ -13,16 +13,6 @@
         If you are seeing this message it might be disabled
     </noscript>
     <canvas id="canvas"></canvas>
-    <div id="settings">
-        <span>Maximum number of iterations:</span>
-        <input id="max-iter" type="number" min="1" max="255" step="1" value="30" />
-        <span>Definition reduction (faster, but looks ugly):</span>
-        <input id="definition-reduction" type="number" min="1" max="10" step="1" value="1" />
-        <span>Zoom level:</span>
-        <input id="zoom" type="number" min="1" value="1" />
-        <input id="pan-rate" type="number" min="0"  max="1" value="0.5" />
-        
-    </div>
     <div id="controls">
         <input id="draw-button" type="button" value="Draw" />
         <input class="arrow" type="image" alt="up" src="img/arrow_up.png" />
@@ -31,6 +21,17 @@
         <input class="arrow" type="image" alt="left" src="img/arrow_left.png" />
         <input id="zoom-in" type="button" value="+" />
         <input id="zoom-out" type="button" value="-" />
+    </div>
+    <div id="settings">
+        <span>Maximum number of iterations:</span>
+        <input id="max-iter" type="number" min="1" max="255" step="1" value="30" />
+        <span>Definition reduction:</span>
+        <input id="definition-reduction" type="number" min="1" max="10" step="1" value="1" />
+        <span>Zoom level:</span>
+        <input id="zoom" type="number" min="1" value="1" />
+        <span>Pan rate:</span>
+        <input id="pan-rate" type="number" min="0"  max="1" value="0.5" />
+        
     </div>
   </body>
 </html>

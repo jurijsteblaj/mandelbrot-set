@@ -98,6 +98,8 @@ var drawMandelbrot = function(drawLimits, dontSetSize) { // can it be done as a 
             ctx.fillRect(x, y, definitionReduction, definitionReduction);
         }
     }
+    
+    document.querySelector("#draw-button").value = "Redraw";
 };
 
 var pan = function() {

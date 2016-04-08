@@ -19,8 +19,20 @@ noscript {
     color: #ff0000;
 }
 
-#settings, #controls {
-    height: 3%
+#draw-button {
+    width: 100px;
+}
+
+input[type="number"] {
+    width: 50px;
+}
+
+#controls, #settings {
+    height: 3%;
+}
+
+#settings {
+    margin-top: 1%
 }
 
 .arrow {
