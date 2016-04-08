@@ -35,6 +35,6 @@ input[type="number"] {
     margin-top: 1%
 }
 
-.arrow {
+#draw-button, .arrow, .zoom {
     height: 100%;
 }
