@@ -17,8 +17,6 @@ var widthToHeight = function() {
 }
 
 window.onload = function() {
-    document.querySelector('#noscript-warning').style.display = "none";
-    
     document.querySelector('#draw-button').onclick = drawMandelbrot;
     var arrows = document.querySelectorAll('.arrow');
     for (let arrow of arrows) {

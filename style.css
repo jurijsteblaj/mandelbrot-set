@@ -15,7 +15,7 @@ body {
     border-style: solid;
 }
 
-#noscript-warning {
+noscript {
     color: #ff0000;
 }
 
