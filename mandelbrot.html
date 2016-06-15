@@ -12,15 +12,37 @@
         This site requires JavaScript to work properly<br />
         If you are seeing this message it might be disabled
     </noscript>
-    <canvas id="canvas"></canvas>
-    <div id="controls">
-        <input id="draw-button" type="button" value="Draw" />
-        <input class="arrow" type="image" alt="up" src="img/arrow_up.png" />
-        <input class="arrow" type="image" alt="right" src="img/arrow_right.png" />
-        <input class="arrow" type="image" alt="down" src="img/arrow_down.png" />
-        <input class="arrow" type="image" alt="left" src="img/arrow_left.png" />
-        <input class="zoom" id="zoom-in" type="button" value="+" />
-        <input class="zoom" id="zoom-out" type="button" value="-" />
+    <div id="work-area">
+        <canvas id="canvas"></canvas>
+        <div id="controls">
+            <input id="draw-button" type="button" value="Draw" />
+            
+            <svg viewBox="0 0 300 300">
+                <polygon id="up-arrow" points="150,0 100,100 200,100" style="fill:black;" />
+                <text x="50%" y="25%" alignment-baseline="middle" text-anchor="middle" style="fill:white;">
+                    up
+                </text>
+                
+                <polygon id="right-arrow" points="300,150 200,100 200,200" style="fill:black;" />
+                <text x="75%" y="50%" alignment-baseline="middle" text-anchor="middle" style="fill:white;">
+                    right
+                </text>
+                
+                <polygon id="down-arrow" points="150,300 200,200 100,200" style="fill:black;" />
+                <text x="50%" y="75%" alignment-baseline="middle" text-anchor="middle" style="fill:white;">
+                    down
+                </text>
+                
+                
+                <polygon id="left-arrow" points="0,150 100,200 100,100" style="fill:black;" />
+                <text x="25%" y="50%" alignment-baseline="middle" text-anchor="middle" style="fill:white;">
+                    left
+                </text>
+            </svg>
+            
+            <input class="zoom" id="zoom-in" type="button" value="+" />
+            <input class="zoom" id="zoom-out" type="button" value="-" />
+        </div>
     </div>
     <div id="settings">
         <span>Maximum number of iterations:</span>

@@ -6,7 +6,7 @@ var xOffset = 0;
 
 var imageCenter = function() {
     return [(startX + endX)/2, (startY + endY)/2];
-}
+};
 
 var widthToHeight = function() {
     var canvas = document.querySelector('#canvas');
@@ -14,11 +14,11 @@ var widthToHeight = function() {
     var height = canvas.clientHeight;
     
     return widthToHeight = width / height;
-}
+};
 
 window.onload = function() {
     document.querySelector('#draw-button').onclick = drawMandelbrot;
-    var arrows = document.querySelectorAll('.arrow');
+    var arrows = document.querySelectorAll('svg polygon');
     for (var i = 0; i < arrows.length; i++) {
         arrows[i].onclick = pan;
     }
@@ -104,16 +104,19 @@ var drawMandelbrot = function(drawLimits, dontSetSize) { // can it be done as a 
 
 var pan = function() {
     var panRate = parseFloat(document.querySelector("#pan-rate").value);
-    var direction = this.alt
+    var direction = this.id;
     var zoom = parseFloat(document.querySelector('#zoom').value);
     var panAmount = panRate * (endY - startY) / zoom;
     var canvas = document.querySelector('#canvas');
     var panPixelCount = Math.floor(panRate * canvas.height);
     
+    console.log(this.x);
+    console.log(this.y);
+    
     var drawLimits = new Object();
     var ctx = canvas.getContext('2d');
     
-    if (direction === "up") {
+    if (direction === "up-arrow") {
         startY += panAmount;
         endY += panAmount;
         
@@ -123,7 +126,7 @@ var pan = function() {
             drawLimits.y2 = panPixelCount;
         }
     }
-    else if (direction === "right") {
+    else if (direction === "right-arrow") {
         xOffset += panAmount;
         
         if (panRate < 1) {
@@ -132,7 +135,7 @@ var pan = function() {
             drawLimits.x1 = canvas.width - panPixelCount;
         }
     }
-    else if (direction === "down") {
+    else if (direction === "down-arrow") {
         startY -= panAmount;
         endY -= panAmount;
         
@@ -142,7 +145,7 @@ var pan = function() {
             drawLimits.y1 = canvas.height - panPixelCount;
         }
     }
-    else if (direction === "left") {
+    else if (direction === "left-arrow") {
         xOffset -= panAmount;
         
         if (panRate < 1) {
@@ -153,16 +156,16 @@ var pan = function() {
     }
     
     drawMandelbrot(drawLimits, true);
-}
+};
 
 var zoomIn = function() {
     var zoom = document.querySelector('#zoom');
     zoom.value = parseFloat(zoom.value) * 2;
     drawMandelbrot();
-}
+};
 
 var zoomOut = function() {
     var zoom = document.querySelector('#zoom');
     zoom.value = parseFloat(zoom.value) / 2;
     drawMandelbrot();
-}
+};
