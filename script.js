@@ -24,6 +24,8 @@ window.onload = function() {
     }
     document.querySelector('#zoom-in').onclick = zoomIn;
     document.querySelector('#zoom-out').onclick = zoomOut;
+    
+    drawMandelbrot();
 };
 
 var createPalette = function(maxIter) {
@@ -98,8 +100,6 @@ var drawMandelbrot = function(drawLimits, dontSetSize) { // can it be done as a 
             ctx.fillRect(x, y, definitionReduction, definitionReduction);
         }
     }
-    
-    document.querySelector("#draw-button").value = "Redraw";
 };
 
 var pan = function() {
