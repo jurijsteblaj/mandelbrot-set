@@ -1,7 +1,7 @@
 var startY = -1.5;
 var endY = 1.5;
 var xOffset = 0;
-
+var drawWorker = new Worker("drawWorker.js");
 
 
 var imageCenter = function() {
@@ -17,7 +17,9 @@ var widthToHeight = function() {
 };
 
 window.onload = function() {
-    document.querySelector('#draw-button').onclick = drawMandelbrot;
+    document.querySelector('#draw-button').onclick = function() {
+        drawMandelbrot();
+    };
     var arrows = document.querySelectorAll('svg polygon');
     for (var i = 0; i < arrows.length; i++) {
         arrows[i].onclick = pan;
@@ -41,20 +43,7 @@ var createPalette = function(maxIter) {
     return palette;
 };
 
-var countIterations = function(cX, cY, maxIter) {
-    var x = 0;
-    var y = 0;
-    var iter = 0;
-    while (x*x + y*y < 2*2 && iter < maxIter) {
-        var prevX = x;
-        x = x*x - y*y + cX;
-        y = 2*prevX*y + cY;
-        iter++;
-    }
-    return iter;
-};
-
-var drawMandelbrot = function(drawLimits, dontSetSize) { // can it be done as a web worker to prevent freezing?
+var drawMandelbrot = function(drawLimits, dontSetSize) {
     var canvas = document.querySelector('#canvas');
     var maxIter = parseInt(document.querySelector('#max-iter').value);
     var definitionReduction = parseInt(document.querySelector('#definition-reduction').value);
@@ -88,16 +77,36 @@ var drawMandelbrot = function(drawLimits, dontSetSize) { // can it be done as a 
     var staticX = (endX - startX)/2 * (1 - 1/zoom) + startX;
     var staticY = (endY - startY)/2 * (1 - 1/zoom) - endY;
     
-    for (var x = drawLimits.x1; x < drawLimits.x2; x += definitionReduction) {
+    var data = {};
+    data.width = width;
+    data.height = height;
+    data.iters = [];
+    data.startX = startX;
+    data.endX = endX;
+    data.startY = startY;
+    data.endY = endY;
+    data.zoom = zoom;
+    data.drawLimits = drawLimits;
+    data.staticX = staticX;
+    data.staticY = staticY;
+    data.definitionReduction = definitionReduction;
+    data.palette = palette;
+    data.maxIter = maxIter;
+    
+    drawWorker.postMessage(data);
+};
+
+drawWorker.onmessage = function(e) {
+    var ctx = canvas.getContext('2d');
+    
+    var data = e.data;
+    
+    for (var x = data.drawLimits.x1; x < data.drawLimits.x2; x += data.definitionReduction) {
         
-        var cX = staticX + x / width * (endX - startX) / zoom;
-        
-        for (var y = drawLimits.y1; y < drawLimits.y2; y += definitionReduction) {
-            
-            var cY = staticY + y / height * (endY - startY) / zoom;
-            var iter = countIterations(cX, cY, maxIter);
-            ctx.fillStyle = palette[iter - 1];
-            ctx.fillRect(x, y, definitionReduction, definitionReduction);
+        for (var y = data.drawLimits.y1; y < data.drawLimits.y2; y += data.definitionReduction) {
+            var iter = e.data.iters[(x-data.drawLimits.x1)/data.definitionReduction][(y-data.drawLimits.y1)/data.definitionReduction];
+            ctx.fillStyle = data.palette[iter - 1];
+            ctx.fillRect(x, y, data.definitionReduction, data.definitionReduction);
         }
     }
 };
@@ -109,9 +118,6 @@ var pan = function() {
     var panAmount = panRate * (endY - startY) / zoom;
     var canvas = document.querySelector('#canvas');
     var panPixelCount = Math.floor(panRate * canvas.height);
-    
-    console.log(this.x);
-    console.log(this.y);
     
     var drawLimits = new Object();
     var ctx = canvas.getContext('2d');
