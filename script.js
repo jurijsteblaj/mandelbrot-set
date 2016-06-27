@@ -16,10 +16,35 @@ var widthToHeight = function() {
     return widthToHeight = width / height;
 };
 
+var resize = function() {
+    var canvas = document.querySelector("#canvas");
+    var controls = document.querySelector("#controls");
+    
+    var parent = canvas.parentNode;
+    
+    if (parent.clientWidth/parent.clientHeight > 4/3) {
+        canvas.style.width = parent.clientWidth - parent.clientHeight / 4 + "px";
+        canvas.style.height = parent.clientHeight + "px";
+        
+        controls.style.width = parent.clientHeight / 4 - 30 + "px";
+        controls.style.height = parent.clientHeight + "px";
+    }
+    else {
+        canvas.style.height = parent.clientHeight - parent.clientWidth / 4 + "px";
+        canvas.style.width = parent.clientWidth + "px";
+        
+        controls.style.height = parent.clientWidth / 4 - 10 + "px";
+        controls.style.width = parent.clientWidth - 20 + "px";
+    }
+};
+
 window.onload = function() {
+    resize();
+
     document.querySelector('#draw-button').onclick = function() {
         drawMandelbrot();
     };
+    
     var arrows = document.querySelectorAll('svg polygon');
     for (var i = 0; i < arrows.length; i++) {
         arrows[i].onclick = pan;
@@ -28,6 +53,10 @@ window.onload = function() {
     document.querySelector('#zoom-out').onclick = zoomOut;
     
     drawMandelbrot();
+};
+
+window.onresize = function() {
+    resize();
 };
 
 var createPalette = function(maxIter) {

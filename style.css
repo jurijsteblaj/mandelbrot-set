@@ -9,17 +9,13 @@ body {
 }
 
 #work-area {
-/*
-    height: 90%;
-    */
-    margin: 1% 1% 1% 1%;
+    margin: 10px 10px 10px 10px;
     height: 98%;
 }
 
 #canvas {
     
     display: block;
-    height: 65%;
     width: 98%;
     border-style: solid;
 }
@@ -37,20 +33,15 @@ input[type="number"] {
 }
 
 #controls {
-    margin-top: 1%;
-    height: 30%;
+    margin-top: 10px;
 }
 
-#controls svg {
-    height: 100%;
+#controls svg, #controls img {
+    width: 23%;
 }
 
 #settings {
     display: none;
-/*
-    height: 3%;
-    margin-top: 1%
-    */
 }
 
 #draw-button, .zoom {
@@ -67,36 +58,29 @@ input[type="number"] {
     width: 5%;
 }
 
+#draw-button {
+    display: none;
+}
 
 @media screen and (min-aspect-ratio: 4/3) {
     #work-area {
-        height: 90%;
+        height: 98%;
     }
     #canvas {
         height: 100%;
-        width: 80%;
+         width: 80%; 
         display: inline;
-        /*margin-left: 0;*/
+    }
+    
+    #controls svg, #controls img {
+         width: 100%;
     }
     
     #controls {
         float: right;
-        height: 100%;
         width: 18%;
         display: table;
         table-layout: fixed;
         text-align: center;
     }
-    /*
-    #controls > * {
-        display: table-row;
-        height: 100%;
-        width: 100%;
-        margin: auto;
-    }
-    */
-    #settings {
-        display: block;
-    }
-
 }
