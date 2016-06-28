@@ -1,3 +1,8 @@
+var maxIter = 30;
+var definitionReduction = 1;
+var zoom = 1;
+var panRate = 0.1;
+
 var startY = -1.5;
 var endY = 1.5;
 var xOffset = 0;
@@ -38,12 +43,39 @@ var resize = function() {
     }
 };
 
+var showSettings = function() {
+    document.querySelector('#overlay').style.display = "block";
+    document.querySelector('#settings').style.display = "block";
+    
+    document.querySelector('#max-iter').value = maxIter;
+    document.querySelector('#definition-reduction').value = definitionReduction;
+    document.querySelector('#pan-rate').value = panRate;
+};
+
+var hideSettings = function() {
+    document.querySelector('#overlay').style.display = "none";
+    document.querySelector('#settings').style.display = "none";
+};
+
+var setSettings = function() { // check for validity
+    maxIter = parseInt(document.querySelector('#max-iter').value);
+    definitionReduction = parseInt(document.querySelector('#definition-reduction').value);
+    panRate = parseFloat(document.querySelector('#pan-rate').value);
+}
+
 window.onload = function() {
     resize();
 
     document.querySelector('#draw-button').onclick = function() {
         drawMandelbrot();
     };
+    
+    document.querySelector('#settings-button').onclick = showSettings;
+    document.querySelector('#settings-ok').onclick = function() {
+        setSettings();
+        hideSettings();
+    }
+    document.querySelector('#settings-cancel').onclick = hideSettings;
     
     var arrows = document.querySelectorAll('svg polygon');
     for (var i = 0; i < arrows.length; i++) {
@@ -74,9 +106,6 @@ var createPalette = function(maxIter) {
 
 var drawMandelbrot = function(drawLimits, dontSetSize) {
     var canvas = document.querySelector('#canvas');
-    var maxIter = parseInt(document.querySelector('#max-iter').value);
-    var definitionReduction = parseInt(document.querySelector('#definition-reduction').value);
-    var zoom = parseFloat(document.querySelector('#zoom').value);
     
     var width = canvas.clientWidth;
     var height = canvas.clientHeight;
@@ -141,9 +170,7 @@ drawWorker.onmessage = function(e) {
 };
 
 var pan = function() {
-    var panRate = parseFloat(document.querySelector("#pan-rate").value);
     var direction = this.id;
-    var zoom = parseFloat(document.querySelector('#zoom').value);
     var panAmount = panRate * (endY - startY) / zoom;
     var canvas = document.querySelector('#canvas');
     var panPixelCount = Math.floor(panRate * canvas.height);
@@ -194,13 +221,11 @@ var pan = function() {
 };
 
 var zoomIn = function() {
-    var zoom = document.querySelector('#zoom');
-    zoom.value = parseFloat(zoom.value) * 2;
+    zoom = zoom * 2;
     drawMandelbrot();
 };
 
 var zoomOut = function() {
-    var zoom = document.querySelector('#zoom');
-    zoom.value = parseFloat(zoom.value) / 2;
+    zoom = zoom / 2;
     drawMandelbrot();
 };

@@ -26,19 +26,23 @@
             
             <img id="zoom-in" src="img/plus.svg" />
             <img id="zoom-out" src="img/minus.svg" />
-            <img src="img/gear.svg" />
+            <img id="settings-button" src="img/gear.svg" />
         </div>
     </div>
     <div id="settings">
         <span>Maximum number of iterations:</span>
         <input id="max-iter" type="number" min="1" max="255" step="1" value="30" />
+        <br />
         <span>Definition reduction:</span>
         <input id="definition-reduction" type="number" min="1" max="10" step="1" value="1" />
-        <span>Zoom level:</span>
-        <input id="zoom" type="number" min="1" value="1" />
+        <br />
         <span>Pan rate:</span>
-        <input id="pan-rate" type="number" min="0.05"  max="1" value="0.1" />
+        <input id="pan-rate" type="number" min="0.05"  max="1" step="0.01" value="0.1" />
+        <br />
         
+        <input id="settings-ok" type="button" value="Ok" />
+        <input id="settings-cancel" type="button" value="Cancel" />
     </div>
+    <div id="overlay" />
   </body>
 </html>

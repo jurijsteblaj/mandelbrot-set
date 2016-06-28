@@ -1,4 +1,4 @@
-html, body {
+html {
     height: 100%;
 }
 
@@ -28,10 +28,6 @@ noscript {
     width: 100px;
 }
 
-input[type="number"] {
-    width: 50px;
-}
-
 #controls {
     margin-top: 10px;
 }
@@ -40,26 +36,33 @@ input[type="number"] {
     width: 23%;
 }
 
-#settings {
+#draw-button {
     display: none;
-}
-
-#draw-button, .zoom {
     height: 5%;
 }
 
-.arrow {
-    display: table-cell;
-    height: 100%;
-    width: 33%;
-}
 
-.zoom {
-    width: 5%;
-}
 
-#draw-button {
+#settings {
     display: none;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    height: 50%;
+    width: 50%;
+    background: white;
+    z-index: 101;
+}
+
+#overlay {
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
 }
 
 @media screen and (min-aspect-ratio: 4/3) {
