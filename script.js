@@ -1,4 +1,4 @@
-var maxIter = 30;
+var maxIter = 255;
 var definitionReduction = 1;
 var zoom = 1;
 var panRate = 0.1;
