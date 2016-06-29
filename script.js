@@ -74,6 +74,7 @@ window.onload = function() {
     document.querySelector('#settings-ok').onclick = function() {
         setSettings();
         hideSettings();
+        drawMandelbrot();
     }
     document.querySelector('#settings-cancel').onclick = hideSettings;
     

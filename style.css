@@ -46,12 +46,31 @@ noscript {
 #settings {
     display: none;
     position: absolute;
-    top: 25%;
-    left: 25%;
-    height: 50%;
-    width: 50%;
+    top: 35%;
+    left: 10%;
+    height: 30%;
+    width: 80%;
     background: white;
     z-index: 101;
+}
+
+#settings > span {
+    display: inline-block;
+    width: 100%;
+    margin: 1% 1% 1% 1%;
+}
+
+.label {
+    display: inline-block;
+    width: 70%;
+}
+
+#settings input[type="number"] {
+    width: 50px;
+}
+
+#settings input[type="button"] {
+    margin-left: 2%;
 }
 
 #overlay {
@@ -85,5 +104,10 @@ noscript {
         display: table;
         table-layout: fixed;
         text-align: center;
+    }
+    
+    #settings {
+        left: 25%;
+        width: 50%;
     }
 }
